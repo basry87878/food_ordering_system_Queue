@@ -108,26 +108,6 @@ All orders processed!
 | No thread lock on Queue | 🔴 High | Add `threading.Lock()` to protect shared buffer |
 | `serve_orders` may exit early if queue is temporarily empty | 🟠 Medium | Track total served count or use a sentinel value |
 | Using `list.insert(0, ...)` is O(n) | 🟡 Low | Use `collections.deque` for O(1) operations |
-
-### Thread-Safe Queue (Recommended)
-
-```python
-class Queue:
-    def __init__(self):
-        self.buffer = []
-        self.lock = threading.Lock()
-
-    def enqueue(self, value):
-        with self.lock:
-            self.buffer.insert(0, value)
-
-    def dequeue(self):
-        with self.lock:
-            return self.buffer.pop()
-```
-
-> 💡 Alternatively, use Python's built-in [`queue.Queue`](https://docs.python.org/3/library/queue.html) which is thread-safe by design.
-
 ---
 
 ## 📚 Concepts Covered
@@ -144,7 +124,7 @@ class Queue:
 
 - [Python `threading` Documentation](https://docs.python.org/3/library/threading.html)
 - [Python `queue` Documentation](https://docs.python.org/3/library/queue.html)
-- [Producer-Consumer Problem – Wikipedia](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem)
+- [Producer-Consumer Problem](https://github.com/codebasics/data-structures-algorithms-python/blob/master/data_structures/6_Queue/6_queue_exercise.md)
 
 ---
 
